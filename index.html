@@ -204,7 +204,17 @@ function closeChat() {
     document.getElementById("chatbox").style.display = "none";
 }
 
-function sendMessage() {
+const WORKER_URL = "https://aisect-mizoram-ai.sicmizoram.workers.dev/";
+
+function openChat() {
+    document.getElementById("chatbox").style.display = "flex";
+}
+
+function closeChat() {
+    document.getElementById("chatbox").style.display = "none";
+}
+
+async function sendMessage() {
 
     const input = document.getElementById("userInput");
     const message = input.value.trim();
@@ -213,6 +223,7 @@ function sendMessage() {
 
     const messages = document.getElementById("messages");
 
+    // Show user message
     const userMessage = document.createElement("div");
 
     userMessage.style.background = "#214e63";
@@ -225,13 +236,62 @@ function sendMessage() {
     userMessage.style.textAlign = "left";
 
     userMessage.textContent = message;
-
     messages.appendChild(userMessage);
 
     input.value = "";
+    input.disabled = true;
+
+    // Show thinking message
+    const thinking = document.createElement("div");
+    thinking.className = "bot-message";
+    thinking.textContent = "Thinking...";
+    messages.appendChild(thinking);
 
     messages.scrollTop = messages.scrollHeight;
 
+    try {
+        const response = await fetch(WORKER_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        thinking.remove();
+
+        const botMessage = document.createElement("div");
+        botMessage.className = "bot-message";
+
+        if (data.reply) {
+            botMessage.textContent = data.reply;
+        } else {
+            botMessage.textContent =
+                "Sorry, I could not process your request. Please try again.";
+        }
+
+        messages.appendChild(botMessage);
+
+    } catch (error) {
+
+        thinking.remove();
+
+        const errorMessage = document.createElement("div");
+        errorMessage.className = "bot-message";
+        errorMessage.textContent =
+            "Connection error. Please try again.";
+
+        messages.appendChild(errorMessage);
+    }
+
+    input.disabled = false;
+    input.focus();
+
+    messages.scrollTop = messages.scrollHeight;
 }
 
 </script>
