@@ -70,7 +70,7 @@
             right: 30px;
             bottom: 30px;
             width: 400px;
-            height: 600px;
+            height: 550px;
             background: white;
             border-radius: 18px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -104,10 +104,11 @@
             background: #eef2f5;
             padding: 12px 15px;
             border-radius: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             max-width: 85%;
             text-align: left;
-            line-height: 1.4;
+            line-height: 1.5;
+            white-space: pre-wrap;
         }
 
         .user-message {
@@ -119,48 +120,34 @@
             margin-left: auto;
             max-width: 85%;
             text-align: left;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* Category buttons */
+        /* Suggested questions */
 
-        .category-buttons {
+        .suggestions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 18px;
         }
 
-        .category-button {
-            background: #214e63;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
+        .suggestion-btn {
+            background: white;
+            color: #214e63;
+            border: 1px solid #214e63;
+            padding: 9px 13px;
+            border-radius: 16px;
             cursor: pointer;
             text-align: left;
+            font-size: 14px;
+            max-width: 100%;
         }
 
-        .category-button:hover {
-            background: #163b4d;
-        }
-
-        .selected-category {
-            font-size: 13px;
-            padding: 8px 12px;
-            background: #eef2f5;
-            border-bottom: 1px solid #ddd;
-            color: #214e63;
-            display: none;
-        }
-
-        .change-category {
-            float: right;
-            cursor: pointer;
-            font-weight: bold;
+        .suggestion-btn:hover {
+            background: #214e63;
+            color: white;
         }
 
         .chat-input {
@@ -200,9 +187,9 @@
 
             .chatbox {
                 width: 90%;
-                height: 80vh;
                 right: 5%;
                 bottom: 20px;
+                height: 80vh;
             }
         }
     </style>
@@ -242,39 +229,14 @@
 
         </div>
 
-        <div class="selected-category" id="selectedCategory">
-            <span id="categoryName"></span>
-            <span class="change-category" onclick="showCategories()">
-                Change
-            </span>
-        </div>
-
 
         <div class="messages" id="messages">
 
-            <div class="bot-message" id="welcomeMessage">
+            <div class="bot-message">
                 Hello! I am the AISECT Mizoram AI Assistant.
-                <br><br>
-                Please select the information you are looking for:
 
-                <div class="category-buttons" id="categoryButtons">
-
-                    <button
-                        class="category-button"
-                        onclick="selectCategory('ug_pg', 'Online UG/PG')"
-                    >
-                        Online UG/PG
-                    </button>
-
-                    <button
-                        class="category-button"
-                        onclick="selectCategory('bed_phd', 'B.Ed / PhD')"
-                    >
-                        B.Ed / PhD
-                    </button>
-
-                </div>
-
+                You can ask me about Online UG & PG programmes,
+                B.Ed, PhD, admissions and more.
             </div>
 
         </div>
@@ -285,8 +247,7 @@
             <input
                 type="text"
                 id="userInput"
-                placeholder="Select a category first..."
-                disabled
+                placeholder="Type your question..."
                 onkeypress="if(event.key === 'Enter') sendMessage()"
             >
 
@@ -304,16 +265,10 @@
         const WORKER_URL =
             "https://aisect-rag.sicmizoram.workers.dev";
 
-        let selectedCategory = null;
-
 
         function openChat() {
-
             document.getElementById("chatbox").style.display = "flex";
-
-            if (selectedCategory) {
-                document.getElementById("userInput").focus();
-            }
+            document.getElementById("userInput").focus();
         }
 
 
@@ -322,96 +277,14 @@
         }
 
 
-        function selectCategory(category, name) {
-
-            selectedCategory = category;
-
-            document.getElementById("categoryName").textContent =
-                "Selected: " + name;
-
-            document.getElementById("selectedCategory").style.display =
-                "block";
-
-            const buttons =
-                document.getElementById("categoryButtons");
-
-            if (buttons) {
-                buttons.style.display = "none";
-            }
-
-            const welcome =
-                document.getElementById("welcomeMessage");
-
-            welcome.innerHTML = `
-                You selected <strong>${name}</strong>.
-                <br><br>
-                Please ask your question.
-            `;
-
-            const input =
-                document.getElementById("userInput");
-
-            input.disabled = false;
-            input.placeholder = "Type your question...";
-            input.focus();
-        }
-
-
-        function showCategories() {
-
-            selectedCategory = null;
-
-            document.getElementById("selectedCategory").style.display =
-                "none";
-
-            const messages =
-                document.getElementById("messages");
-
-            messages.innerHTML = `
-                <div class="bot-message" id="welcomeMessage">
-                    Hello! I am the AISECT Mizoram AI Assistant.
-                    <br><br>
-                    Please select the information you are looking for:
-
-                    <div class="category-buttons" id="categoryButtons">
-
-                        <button
-                            class="category-button"
-                            onclick="selectCategory('ug_pg', 'Online UG/PG')"
-                        >
-                            Online UG/PG
-                        </button>
-
-                        <button
-                            class="category-button"
-                            onclick="selectCategory('bed_phd', 'B.Ed / PhD')"
-                        >
-                            B.Ed / PhD
-                        </button>
-
-                    </div>
-                </div>
-            `;
-
-            const input =
-                document.getElementById("userInput");
-
-            input.disabled = true;
-            input.placeholder = "Select a category first...";
-        }
-
-
-        async function sendMessage() {
-
-            if (!selectedCategory) {
-                return;
-            }
+        async function sendMessage(suggestedMessage = null) {
 
             const input =
                 document.getElementById("userInput");
 
             const message =
-                input.value.trim();
+                suggestedMessage || input.value.trim();
+
 
             if (message === "") return;
 
@@ -419,6 +292,8 @@
             const messages =
                 document.getElementById("messages");
 
+
+            /* Show user message */
 
             const userMessage =
                 document.createElement("div");
@@ -436,6 +311,12 @@
             input.disabled = true;
 
 
+            messages.scrollTop =
+                messages.scrollHeight;
+
+
+            /* Show loading message */
+
             const loadingMessage =
                 document.createElement("div");
 
@@ -445,7 +326,10 @@
             loadingMessage.textContent =
                 "Thinking...";
 
-            messages.appendChild(loadingMessage);
+            messages.appendChild(
+                loadingMessage
+            );
+
 
             messages.scrollTop =
                 messages.scrollHeight;
@@ -464,8 +348,7 @@
                         },
 
                         body: JSON.stringify({
-                            message: message,
-                            category: selectedCategory
+                            message: message
                         })
 
                     });
@@ -477,6 +360,8 @@
 
                 loadingMessage.remove();
 
+
+                /* Show AI reply */
 
                 const botMessage =
                     document.createElement("div");
@@ -498,7 +383,76 @@
                 }
 
 
-                messages.appendChild(botMessage);
+                messages.appendChild(
+                    botMessage
+                );
+
+
+                /* Show related questions */
+
+                if (
+                    data.suggestions &&
+                    Array.isArray(data.suggestions) &&
+                    data.suggestions.length > 0
+                ) {
+
+                    const suggestionsContainer =
+                        document.createElement("div");
+
+                    suggestionsContainer.className =
+                        "suggestions";
+
+
+                    data.suggestions.forEach(
+                        function(question) {
+
+                            const button =
+                                document.createElement("button");
+
+                            button.className =
+                                "suggestion-btn";
+
+                            button.textContent =
+                                question;
+
+
+                            button.onclick =
+                                function() {
+
+                                    /* Remove all old suggestions */
+
+                                    const oldSuggestions =
+                                        document.querySelectorAll(
+                                            ".suggestions"
+                                        );
+
+                                    oldSuggestions.forEach(
+                                        function(item) {
+                                            item.remove();
+                                        }
+                                    );
+
+
+                                    /* Send selected question */
+
+                                    sendMessage(question);
+
+                                };
+
+
+                            suggestionsContainer.appendChild(
+                                button
+                            );
+
+                        }
+                    );
+
+
+                    messages.appendChild(
+                        suggestionsContainer
+                    );
+
+                }
 
 
             } catch (error) {
@@ -515,13 +469,17 @@
                 errorMessage.textContent =
                     "Sorry, I am unable to connect right now.";
 
-                messages.appendChild(errorMessage);
+
+                messages.appendChild(
+                    errorMessage
+                );
 
             }
 
 
             input.disabled = false;
             input.focus();
+
 
             messages.scrollTop =
                 messages.scrollHeight;
