@@ -1,233 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>AISECT Mizoram</title>
+<title>AISECT Mizoram AI</title>
 
-  <style>
+<style>
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+        box-sizing: border-box;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f4f8fb, #e8f1f5);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1d2b38;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f3f6f8;
+        color: #243447;
     }
 
-    .container {
-      text-align: center;
-      padding: 30px;
-      max-width: 750px;
+    .landing {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
     }
 
-    .logo {
-      font-size: 32px;
-      font-weight: 700;
-      color: #17445b;
-      margin-bottom: 35px;
+    .brand {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 40px;
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+        font-size: 56px;
+        margin: 0 0 20px;
     }
 
-    .subtitle {
-      font-size: 20px;
-      line-height: 1.6;
-      color: #5d6973;
-      margin-bottom: 40px;
+    .description {
+        font-size: 22px;
+        max-width: 700px;
+        line-height: 1.5;
+        margin-bottom: 40px;
     }
 
     .chat-button {
-      background: #17445b;
-      color: white;
-      border: none;
-      padding: 18px 30px;
-      border-radius: 14px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 8px 20px rgba(23, 68, 91, 0.2);
+        background: #214e63;
+        color: white;
+        border: none;
+        padding: 22px 45px;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 15px;
+        cursor: pointer;
     }
 
     .chat-button:hover {
-      background: #0e3448;
-      transform: translateY(-2px);
+        background: #163b4d;
     }
 
-    .chat-icon {
-      font-size: 22px;
-      margin-right: 10px;
-    }
-
-    /* Chatbot Window */
-    .chatbot {
-      display: none;
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 380px;
-      height: 550px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-      overflow: hidden;
-      z-index: 1000;
-      flex-direction: column;
+    /* Chatbot */
+    .chatbox {
+        display: none;
+        position: fixed;
+        right: 30px;
+        bottom: 30px;
+        width: 400px;
+        height: 550px;
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        overflow: hidden;
+        flex-direction: column;
     }
 
     .chat-header {
-      background: #17445b;
-      color: white;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
+        background: #214e63;
+        color: white;
+        padding: 18px;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .close {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
+    .close-btn {
+        cursor: pointer;
+        font-size: 24px;
     }
 
-    .chat-body {
-      flex: 1;
-      padding: 20px;
-      background: #f7f9fa;
-      overflow-y: auto;
+    .messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
     }
 
-    .message {
-      background: white;
-      padding: 14px;
-      border-radius: 12px;
-      max-width: 85%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      line-height: 1.5;
+    .bot-message {
+        background: #eef2f5;
+        padding: 12px 15px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        max-width: 85%;
+        text-align: left;
     }
 
     .chat-input {
-      display: flex;
-      padding: 15px;
-      border-top: 1px solid #eee;
-      gap: 10px;
+        display: flex;
+        border-top: 1px solid #ddd;
     }
 
     .chat-input input {
-      flex: 1;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      outline: none;
+        flex: 1;
+        border: none;
+        padding: 18px;
+        font-size: 16px;
+        outline: none;
     }
 
-    .send-button {
-      background: #17445b;
-      color: white;
-      border: none;
-      padding: 0 18px;
-      border-radius: 10px;
-      cursor: pointer;
+    .chat-input button {
+        background: #214e63;
+        color: white;
+        border: none;
+        padding: 0 22px;
+        cursor: pointer;
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 36px;
-      }
+        h1 {
+            font-size: 38px;
+        }
 
-      .chatbot {
-        width: calc(100% - 30px);
-        right: 15px;
-        bottom: 15px;
-        height: 75vh;
-      }
+        .chatbox {
+            width: 90%;
+            right: 5%;
+            bottom: 20px;
+        }
     }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="landing">
 
-    <div class="logo">AISECT Mizoram</div>
+    <div class="brand">AISECT Mizoram</div>
 
     <h1>Your AI Education Assistant</h1>
 
-    <p class="subtitle">
-      Ask about Online UG & PG programmes, Skill Development courses,
-      admissions and more.
-    </p>
-
-    <button class="chat-button" onclick="openChat()">
-      <span class="chat-icon">💬</span>
-      Chat with AISECT Mizoram AI
-    </button>
-
-  </div>
-
-
-  <!-- Chatbot -->
-
-  <div class="chatbot" id="chatbot">
-
-    <div class="chat-header">
-      <span>AISECT Mizoram AI</span>
-
-      <button class="close" onclick="closeChat()">×</button>
+    <div class="description">
+        Ask about Online UG & PG programmes, Skill Development courses,
+        admissions and more.
     </div>
 
-    <div class="chat-body">
+    <button class="chat-button" onclick="openChat()">
+        💬 Chat with AISECT Mizoram AI
+    </button>
 
-      <div class="message">
-        Hello! I am the AISECT Mizoram AI Assistant.<br><br>
-        How can I help you today?
-      </div>
+</div>
+
+
+<div class="chatbox" id="chatbox">
+
+    <div class="chat-header">
+        AISECT Mizoram AI
+        <span class="close-btn" onclick="closeChat()">×</span>
+    </div>
+
+    <div class="messages" id="messages">
+
+        <div class="bot-message">
+            Hello! I am the AISECT Mizoram AI Assistant.<br><br>
+            You can ask me about Online UG & PG programmes, Skill Development courses, admissions and more.
+        </div>
 
     </div>
 
     <div class="chat-input">
 
-      <input
-        type="text"
-        id="messageInput"
-        placeholder="Type your message..."
-      >
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Type your question..."
+            onkeypress="if(event.key==='Enter') sendMessage()"
+        >
 
-      <button class="send-button">
-        Send
-      </button>
+        <button onclick="sendMessage()">Send</button>
 
     </div>
 
-  </div>
+</div>
 
 
-  <script>
+<script>
 
-    function openChat() {
-      document.getElementById("chatbot").style.display = "flex";
-    }
+function openChat() {
+    document.getElementById("chatbox").style.display = "flex";
+}
 
-    function closeChat() {
-      document.getElementById("chatbot").style.display = "none";
-    }
+function closeChat() {
+    document.getElementById("chatbox").style.display = "none";
+}
 
-  </script>
+function sendMessage() {
+
+    const input = document.getElementById("userInput");
+    const message = input.value.trim();
+
+    if (message === "") return;
+
+    const messages = document.getElementById("messages");
+
+    const userMessage = document.createElement("div");
+
+    userMessage.style.background = "#214e63";
+    userMessage.style.color = "white";
+    userMessage.style.padding = "12px 15px";
+    userMessage.style.borderRadius = "12px";
+    userMessage.style.marginBottom = "15px";
+    userMessage.style.marginLeft = "auto";
+    userMessage.style.maxWidth = "85%";
+    userMessage.style.textAlign = "left";
+
+    userMessage.textContent = message;
+
+    messages.appendChild(userMessage);
+
+    input.value = "";
+
+    messages.scrollTop = messages.scrollHeight;
+
+}
+
+</script>
 
 </body>
 </html>
