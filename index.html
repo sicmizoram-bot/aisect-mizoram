@@ -70,7 +70,7 @@
             right: 30px;
             bottom: 30px;
             width: 400px;
-            height: 550px;
+            height: 600px;
             background: white;
             border-radius: 18px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -122,6 +122,47 @@
             line-height: 1.4;
         }
 
+        /* Category buttons */
+
+        .category-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .category-button {
+            background: #214e63;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .category-button:hover {
+            background: #163b4d;
+        }
+
+        .selected-category {
+            font-size: 13px;
+            padding: 8px 12px;
+            background: #eef2f5;
+            border-bottom: 1px solid #ddd;
+            color: #214e63;
+            display: none;
+        }
+
+        .change-category {
+            float: right;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         .chat-input {
             display: flex;
             border-top: 1px solid #ddd;
@@ -159,6 +200,7 @@
 
             .chatbox {
                 width: 90%;
+                height: 80vh;
                 right: 5%;
                 bottom: 20px;
             }
@@ -177,12 +219,12 @@
         <h1>Your AI Education Assistant</h1>
 
         <div class="description">
-            Ask about Online UG & PG programmes, Skill Development courses,
+            Ask about Online UG & PG programmes, B.Ed, PhD,
             admissions and more.
         </div>
 
         <button class="chat-button" onclick="openChat()">
-            💬 Chat with AISECT Mizoram AI
+            Chat with AISECT Mizoram AI
         </button>
 
     </div>
@@ -200,14 +242,39 @@
 
         </div>
 
+        <div class="selected-category" id="selectedCategory">
+            <span id="categoryName"></span>
+            <span class="change-category" onclick="showCategories()">
+                Change
+            </span>
+        </div>
+
 
         <div class="messages" id="messages">
 
-            <div class="bot-message">
+            <div class="bot-message" id="welcomeMessage">
                 Hello! I am the AISECT Mizoram AI Assistant.
                 <br><br>
-                You can ask me about Online UG & PG programmes,
-                Skill Development courses, admissions and more.
+                Please select the information you are looking for:
+
+                <div class="category-buttons" id="categoryButtons">
+
+                    <button
+                        class="category-button"
+                        onclick="selectCategory('ug_pg', 'Online UG/PG')"
+                    >
+                        Online UG/PG
+                    </button>
+
+                    <button
+                        class="category-button"
+                        onclick="selectCategory('bed_phd', 'B.Ed / PhD')"
+                    >
+                        B.Ed / PhD
+                    </button>
+
+                </div>
+
             </div>
 
         </div>
@@ -218,7 +285,8 @@
             <input
                 type="text"
                 id="userInput"
-                placeholder="Type your question..."
+                placeholder="Select a category first..."
+                disabled
                 onkeypress="if(event.key === 'Enter') sendMessage()"
             >
 
@@ -236,10 +304,16 @@
         const WORKER_URL =
             "https://aisect-rag.sicmizoram.workers.dev";
 
+        let selectedCategory = null;
+
 
         function openChat() {
+
             document.getElementById("chatbox").style.display = "flex";
-            document.getElementById("userInput").focus();
+
+            if (selectedCategory) {
+                document.getElementById("userInput").focus();
+            }
         }
 
 
@@ -248,10 +322,96 @@
         }
 
 
+        function selectCategory(category, name) {
+
+            selectedCategory = category;
+
+            document.getElementById("categoryName").textContent =
+                "Selected: " + name;
+
+            document.getElementById("selectedCategory").style.display =
+                "block";
+
+            const buttons =
+                document.getElementById("categoryButtons");
+
+            if (buttons) {
+                buttons.style.display = "none";
+            }
+
+            const welcome =
+                document.getElementById("welcomeMessage");
+
+            welcome.innerHTML = `
+                You selected <strong>${name}</strong>.
+                <br><br>
+                Please ask your question.
+            `;
+
+            const input =
+                document.getElementById("userInput");
+
+            input.disabled = false;
+            input.placeholder = "Type your question...";
+            input.focus();
+        }
+
+
+        function showCategories() {
+
+            selectedCategory = null;
+
+            document.getElementById("selectedCategory").style.display =
+                "none";
+
+            const messages =
+                document.getElementById("messages");
+
+            messages.innerHTML = `
+                <div class="bot-message" id="welcomeMessage">
+                    Hello! I am the AISECT Mizoram AI Assistant.
+                    <br><br>
+                    Please select the information you are looking for:
+
+                    <div class="category-buttons" id="categoryButtons">
+
+                        <button
+                            class="category-button"
+                            onclick="selectCategory('ug_pg', 'Online UG/PG')"
+                        >
+                            Online UG/PG
+                        </button>
+
+                        <button
+                            class="category-button"
+                            onclick="selectCategory('bed_phd', 'B.Ed / PhD')"
+                        >
+                            B.Ed / PhD
+                        </button>
+
+                    </div>
+                </div>
+            `;
+
+            const input =
+                document.getElementById("userInput");
+
+            input.disabled = true;
+            input.placeholder = "Select a category first...";
+        }
+
+
         async function sendMessage() {
 
-            const input = document.getElementById("userInput");
-            const message = input.value.trim();
+            if (!selectedCategory) {
+                return;
+            }
+
+            const input =
+                document.getElementById("userInput");
+
+            const message =
+                input.value.trim();
 
             if (message === "") return;
 
@@ -260,13 +420,14 @@
                 document.getElementById("messages");
 
 
-            /* Show user message */
-
             const userMessage =
                 document.createElement("div");
 
-            userMessage.className = "user-message";
-            userMessage.textContent = message;
+            userMessage.className =
+                "user-message";
+
+            userMessage.textContent =
+                message;
 
             messages.appendChild(userMessage);
 
@@ -274,11 +435,6 @@
             input.value = "";
             input.disabled = true;
 
-            messages.scrollTop =
-                messages.scrollHeight;
-
-
-            /* Show loading message */
 
             const loadingMessage =
                 document.createElement("div");
@@ -308,7 +464,8 @@
                         },
 
                         body: JSON.stringify({
-                            message: message
+                            message: message,
+                            category: selectedCategory
                         })
 
                     });
@@ -357,7 +514,6 @@
 
                 errorMessage.textContent =
                     "Sorry, I am unable to connect right now.";
-
 
                 messages.appendChild(errorMessage);
 
