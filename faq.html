@@ -1,1 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AISECT Mizoram – Frequently Asked Questions</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7f9;
+            color: #243447;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #214e63;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 15px;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 0 20px 50px;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 1px solid #d4d9de;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            background: white;
+        }
+
+        .search-box input:focus {
+            border-color: #214e63;
+        }
+
+        /* CATEGORY */
+
+        .category {
+            margin-bottom: 35px;
+        }
+
+        .category-title {
+            font-size: 22px;
+            color: #214e63;
+            margin: 0 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dfe5e9;
+        }
+
+        /* FAQ */
+
+        .faq {
+            background: white;
+            border: 1px solid #e1e5e8;
+            border-radius: 9px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .question {
+            width: 100%;
+            background: white;
+            border: none;
+            padding: 18px 20px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            color: #243447;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .question:hover {
+            background: #f7f9fa;
+        }
+
+        .icon {
+            font-size: 20px;
+            color: #214e63;
+            flex-shrink: 0;
+        }
+
+        .answer {
+            display: none;
+            padding: 0 20px 18px;
+            line-height: 1.6;
+            color: #4b5563;
+            font-size: 15px;
+        }
+
+        .answer ul {
+            margin-top: 8px;
+            padding-left: 22px;
+        }
+
+        .answer li {
+            margin-bottom: 5px;
+        }
+
+        .faq.open .answer {
+            display: block;
+        }
+
+        .faq.open .icon {
+            transform: rotate(45deg);
+        }
+
+        /* WHATSAPP */
+
+        .whatsapp {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 15px;
+            background: #214e63;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .whatsapp:hover {
+            background: #163b4d;
+        }
+
+        /* BACK BUTTON */
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 10px 16px;
+            border: 1px solid #214e63;
+            color: #214e63;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background: #214e63;
+            color: white;
+        }
+
+        /* NO RESULT */
+
+        #noResult {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: #214e63;
+            color: white;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .container {
+                margin-top: 25px;
+                padding: 0 12px 40px;
+            }
+
+            .category-title {
+                font-size: 19px;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 16px;
+            }
+
+            .answer {
+                padding: 0 16px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <h1>
+            AISECT Mizoram
+        </h1>
+
+        <p>
+            Frequently Asked Questions
+        </p>
+
+    </header>
+
+
+    <main class="container">
+
+        <a href="index.html" class="back-button">
+            ← Back to AI Assistant
+        </a>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search your question..."
+                onkeyup="searchFAQ()"
+            >
+
+        </div>
+
+
+        <!-- A. ONLINE UG & PG -->
+
+        <section class="category">
+
+            <h2 class="category-title">
+                A. Online UG & PG Courses
+            </h2>
+
+
+            <div class="faq">
+                <button class="question">
+                    What online degree courses are available?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>UG:</strong> BA, B.Sc (Bio), BBA, B.Com, BCA, B.Sc IT, BLIB.
+                    <br><br>
+                    <strong>PG:</strong> MA, M.Sc, M.Com, MSW, MLIB, E-MBA.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How long is an online UG course?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    An online UG course is <strong>3 years with 6 semesters</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How long is an online PG course?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    An online PG course is <strong>2 years with 4 semesters</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the basic eligibility for UG?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The basic eligibility is <strong>Class 12 Pass</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the basic eligibility for PG?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The basic eligibility is <strong>Graduation / Bachelor's Degree</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Can I take UG admission in the same year I pass Class 12?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>No.</strong> First-year UG admission cannot be taken in the same year in which the student passes Class 12.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Can I take PG admission in the same year I complete Graduation?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>No.</strong> PG admission cannot be taken in the same year in which the student completes Graduation.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What are the admission sessions?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    There are generally two sessions:
+                    <ul>
+                        <li><strong>January</strong></li>
+                        <li><strong>July</strong></li>
+                    </ul>
+
+                    <strong>Mizo:</strong> Admission chu kum tluan deuhthaw a tih theih.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is the course fee yearly or semester-wise?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The listed online course fees are <strong>yearly fees</strong>. They are not semester fees.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is the examination fee included in the course fee?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>No.</strong> The <strong>₹2,000 examination fee is separate</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is scholarship available for online courses?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>No.</strong> Scholarship is currently not available for the online courses.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Where can I study from?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Students can study from their <strong>own location</strong> because the programme is online.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How are study materials provided?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Study materials are shared through <strong>email</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How are examinations conducted?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Examinations are conducted <strong>online</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Can I take the exam from my home/location?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Yes. Students can generally take the examination from their own location using a <strong>mobile phone or laptop</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What time can I take the online examination?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The examination can generally be taken between <strong>8:00 AM and 8:00 PM</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How long is each examination?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Each subject examination is <strong>2 hours</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How many subjects can I take in one day?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Generally, <strong>one subject is scheduled per day</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How will I know the examination routine?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The examination routine is shared in advance through the relevant <strong>WhatsApp Group</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What happens if I miss an examination?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The subject may be taken again as a <strong>backlog examination</strong> by paying the applicable backlog fee.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    When will I receive my Registration Number?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    After the admission fee is paid and the admission is processed, a <strong>Registration Number</strong> is issued.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    When will I receive my User ID and Password?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    After completing the <strong>Exam Form</strong> and paying the required examination fee, the student receives the <strong>User ID and Password</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What documents are required for UG admission?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <ul>
+                        <li>Aadhaar Card – front and back in one PDF</li>
+                        <li>Class 10 Marksheet</li>
+                        <li>Class 12 Marksheet</li>
+                        <li>Passport-size Photo</li>
+                        <li>Signature</li>
+                        <li>Mother's Name</li>
+                        <li>Email ID</li>
+                        <li>Phone Number</li>
+                        <li>Class 12 Division</li>
+                        <li>Class 12 Percentage</li>
+                        <li>Class 12 Year of Examination</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What documents are required for PG admission?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <ul>
+                        <li>Aadhaar Card – front and back in one PDF</li>
+                        <li>Class 12 Marksheet</li>
+                        <li>Graduation Marksheet</li>
+                        <li>Passport-size Photo</li>
+                        <li>Signature</li>
+                        <li>Mother's Name</li>
+                        <li>Email ID</li>
+                        <li>Phone Number</li>
+                        <li>Graduation Division</li>
+                        <li>Graduation Percentage</li>
+                        <li>Graduation Year of Examination</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Which universities are covered under the online programmes?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The available information covers:
+                    <ul>
+                        <li><strong>Rabindranath Tagore University (RNTU)</strong></li>
+                        <li><strong>Scope Global Skills University (SGSU), Madhya Pradesh</strong></li>
+                    </ul>
+
+                    Course-wise university allocation should be confirmed where necessary.
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- B. PHD -->
+
+        <section class="category">
+
+            <h2 class="category-title">
+                B. Ph.D. Programme
+            </h2>
+
+
+            <div class="faq">
+                <button class="question">
+                    Which university offers the Ph.D. programme?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The Ph.D. programme information is for <strong>Rabindranath Tagore University (RNTU), Bhopal, Madhya Pradesh</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the duration of the Ph.D.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The Ph.D. programme duration is <strong>3 years</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How is the Ph.D. fee paid?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The applicable Ph.D. course fee is paid <strong>yearly for 3 years</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is there an admission fee for Ph.D.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Yes. The <strong>first-year Admission Fee is ₹3,000</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is there an entrance fee?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Yes. The <strong>Entrance Fee is ₹15,000</strong> in the first year.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is scholarship available for Ph.D.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>No.</strong> Scholarship is currently not available for the Ph.D. programme.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is Botany available for Ph.D.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Yes. <strong>Ph.D. in Botany</strong> is listed.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the Ph.D. fee for Botany?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The total course fee is <strong>₹3,78,000</strong>, with a yearly fee of <strong>₹1,26,000</strong>.
+                    <br><br>
+                    First year also has:
+                    <ul>
+                        <li>Admission Fee: ₹3,000</li>
+                        <li>Entrance Fee: ₹15,000</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Does a Ph.D. student need to visit the university?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Candidates may need to visit RNTU approximately <strong>1 or 2 times a year</strong>, depending on university requirements.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Can AISECT Mizoram staff accompany Ph.D. students?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    AISECT Mizoram staff <strong>may assist or accompany students when required</strong>.
+                    <br><br>
+                    Travel, accommodation and related expenses are borne by the candidate.
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- C. B.ED -->
+
+        <section class="category">
+
+            <h2 class="category-title">
+                C. B.Ed. Programme
+            </h2>
+
+
+            <div class="faq">
+                <button class="question">
+                    Which university offers B.Ed.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The B.Ed. programme is under <strong>Rabindranath Tagore University (RNTU)</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the duration of B.Ed.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    B.Ed. is <strong>2 years with 4 semesters</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the B.Ed. semester fee?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The semester fee is <strong>₹40,000 per semester</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the B.Ed. examination fee?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The examination fee is <strong>₹5,000 per semester</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is there an entrance examination fee?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Yes. The <strong>Entrance Exam Fee is ₹1,500</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What is the Global Certificate Fee?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    The Global Certificate Fee is <strong>₹2,000</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Is scholarship available for B.Ed.?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>No.</strong> Scholarship is currently not available for B.Ed.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    How often do B.Ed. students need to travel for examinations?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    B.Ed. students are required to visit for examinations <strong>twice a year</strong>.
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Can AISECT Mizoram staff help with the university visit?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    AISECT Mizoram staff <strong>may assist or accompany students when required</strong>.
+                    <br><br>
+                    Travel and related expenses are borne by the candidate unless otherwise specified.
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- D. CONTACT -->
+
+        <section class="category">
+
+            <h2 class="category-title">
+                D. Admission & Contact
+            </h2>
+
+
+            <div class="faq">
+                <button class="question">
+                    How can I enquire about admission?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Contact the <strong>AISECT Mizoram Admission Coordinator</strong> through WhatsApp.
+                    <br><br>
+
+                    <a
+                        class="whatsapp"
+                        href="https://wa.me/916001785085"
+                        target="_blank"
+                    >
+                        📱 WhatsApp Admission Enquiry
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    Where is the AISECT Mizoram office?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>K361, Salem Veng</strong><br>
+                    Near Zeropoint<br>
+                    Below Fanai Hardware, Mizoram
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What are the office hours?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    <strong>10:00 AM – 5:00 PM</strong>
+                </div>
+            </div>
+
+
+            <div class="faq">
+                <button class="question">
+                    What can I contact AISECT Mizoram about?
+                    <span class="icon">+</span>
+                </button>
+
+                <div class="answer">
+                    Students can contact AISECT Mizoram for:
+                    <ul>
+                        <li>Course enquiry</li>
+                        <li>Eligibility</li>
+                        <li>Admission</li>
+                        <li>Fee information</li>
+                        <li>Required documents</li>
+                        <li>Examination guidance</li>
+                        <li>Admission process</li>
+                        <li>University-related guidance</li>
+                    </ul>
+
+                    <a
+                        class="whatsapp"
+                        href="https://wa.me/916001785085"
+                        target="_blank"
+                    >
+                        📱 Contact on WhatsApp
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+
+        <div id="noResult">
+            No matching questions found.
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+
+        AISECT Mizoram AI
+
+        <br><br>
+
+        Need more help?
+
+        <br>
+
+        <a href="https://wa.me/916001785085" target="_blank">
+            WhatsApp Admission Enquiry
+        </a>
+
+    </footer>
+
+
+    <script>
+
+        /* ACCORDION */
+
+        const questions =
+            document.querySelectorAll(".question");
+
+
+        questions.forEach(function(question) {
+
+            question.addEventListener(
+                "click",
+                function() {
+
+                    const faq =
+                        question.parentElement;
+
+
+                    faq.classList.toggle("open");
+
+                }
+            );
+
+        });
+
+
+        /* SEARCH */
+
+        function searchFAQ() {
+
+            const search =
+                document
+                    .getElementById("search")
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+
+            const faqs =
+                document.querySelectorAll(".faq");
+
+
+            let found = 0;
+
+
+            faqs.forEach(function(faq) {
+
+                const text =
+                    faq.textContent.toLowerCase();
+
+
+                if (
+                    search === "" ||
+                    text.includes(search)
+                ) {
+
+                    faq.style.display =
+                        "block";
+
+                    found++;
+
+                } else {
+
+                    faq.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            document.getElementById(
+                "noResult"
+            ).style.display =
+                found === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
